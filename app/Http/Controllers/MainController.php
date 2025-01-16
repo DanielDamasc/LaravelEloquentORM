@@ -55,10 +55,22 @@ class MainController extends Controller
         //         ]);
 
         // update or create
-        Product::updateOrCreate(
-            ['product_name' => 'Abacaxi'],
-            ['price' => 25]
-        );
+        // Product::updateOrCreate(
+        //     ['product_name' => 'Abacaxi'],
+        //     ['price' => 25]
+        // );
+
+        // hard delete
+        // $product = Product::find(10);
+        // $product->delete();
+
+        // soft delete (com mudança no model)
+        // $product = Product::find(25);
+        // $product->delete();
+
+        // recuperar produto com soft delete
+        $product = Product::withTrashed()->find(25);
+        $product->restore();
     }
 
     private function showData($data)
