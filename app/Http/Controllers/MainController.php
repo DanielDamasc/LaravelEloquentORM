@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Phone;
 
 class MainController extends Controller
 {
@@ -31,13 +32,22 @@ class MainController extends Controller
     public function OneToMany()
     {
         // Encontrar o id, o nome, e todos os telefones do cliente.
-        $client1 = Client::find(10);
-        $phones = $client1->phones;
-        echo "Cliente: " . $client1->client_name . "<br>";
-        echo "Telefones: <br>";
-        foreach ($phones as $phone) {
-            echo $phone->phone_number . "<br>";
-        }
+        // $client1 = Client::find(10);
+        // $phones = $client1->phones;
+        // echo "Cliente: " . $client1->client_name . "<br>";
+        // echo "Telefones: <br>";
+        // foreach ($phones as $phone) {
+        //     echo $phone->phone_number . "<br>";
+        // }
+    }
+
+    public function BelongsTo()
+    {
+        // Vamos pegar o telefone e descobrir a qual cliente pertence
+        $phone1 = Phone::find(10);
+        $client = $phone1->client;
+        echo "Telefone: " . $phone1->phone_number . "<br>";
+        echo "Cliente: " . $client->client_name . "<br>";
     }
 
     private function showData($data)
