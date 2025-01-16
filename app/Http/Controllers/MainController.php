@@ -22,9 +22,21 @@ class MainController extends Controller
         // echo "Telefone do cliente2: " . $cliente2->phone->phone_number;
 
         // buscar todos os clientes e seus telefones
-        $clientes = Client::with('phone')->get();
-        foreach ($clientes as $cliente) {
-            echo $cliente->client_name . ", fone: " . $cliente->phone->phone_number . '<br>';
+        // $clientes = Client::with('phone')->get();
+        // foreach ($clientes as $cliente) {
+        //     echo $cliente->client_name . ", fone: " . $cliente->phone->phone_number . '<br>';
+        // }
+    }
+
+    public function OneToMany()
+    {
+        // Encontrar o id, o nome, e todos os telefones do cliente.
+        $client1 = Client::find(10);
+        $phones = $client1->phones;
+        echo "Cliente: " . $client1->client_name . "<br>";
+        echo "Telefones: <br>";
+        foreach ($phones as $phone) {
+            echo $phone->phone_number . "<br>";
         }
     }
 
