@@ -2,75 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Models\TesteModel;
-use Illuminate\Http\Request;
+use App\Models\Client;
 
 class MainController extends Controller
 {
     public function index()
     {
-        // Apresentando como um array de objetos.
-        // $results = $this->arrayOfObject(Product::all()->toArray());
+        echo "eloquent";
+    }
 
-        // Buscar produtos ordenados alfabeticamente.
-        // $results = Product::orderBy('product_name')->get()->toArray();
+    public function OneToOne()
+    {
+        // Buscar o telefone de um cliente
+        // $cliente1 = Client::find(12)->phone;
+        // echo "Telefone do cliente: " . $cliente1->phone_number;
 
-        // Buscar produtos com cláusula where.
-        // $results = Product::where('price', '>=', 70)->get()->toArray();
+        // Outro método 
+        // $cliente2 = Client::with('phone')->find(12);
+        // echo "Telefone do cliente2: " . $cliente2->phone->phone_number;
 
-        // Buscar o primeiro produto, se não tiver, retorna array vazio.
-        // $results = Product::where('price', '>=', 120)->firstOr(function(){
-        //     echo "Não existe!";
-        // });
-
-        // $this->showData($results);
-
-
-
-        // Insert new product at database
-        // $new_product = new Product();
-        // $new_product->product_name = "Novo Produto";
-        // $new_product->price = 50;
-        // $new_product->save();
-
-        // 2nd way to insert (with created_at e updated_at)
-        // Product::create([
-        //     "product_name" => "Novo Produto 2",
-        //     "price" => 60
-        // ]);
-
-
-
-        // UPDATE data of a product
-        // $product = Product::find(10);
-        // $product->product_name = 'PRODUTO ALTERADO';
-        // $product->price = 10;
-        // $product->save();
-
-        // UPDATE of many products
-        // Product::where('id', '<=', 10)
-        //         ->update([
-        //             'price' => 150
-        //         ]);
-
-        // update or create
-        // Product::updateOrCreate(
-        //     ['product_name' => 'Abacaxi'],
-        //     ['price' => 25]
-        // );
-
-        // hard delete
-        // $product = Product::find(10);
-        // $product->delete();
-
-        // soft delete (com mudança no model)
-        // $product = Product::find(25);
-        // $product->delete();
-
-        // recuperar produto com soft delete
-        $product = Product::withTrashed()->find(25);
-        $product->restore();
+        // buscar todos os clientes e seus telefones
+        $clientes = Client::with('phone')->get();
+        foreach ($clientes as $cliente) {
+            echo $cliente->client_name . ", fone: " . $cliente->phone->phone_number . '<br>';
+        }
     }
 
     private function showData($data)
