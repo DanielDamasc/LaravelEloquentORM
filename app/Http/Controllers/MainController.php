@@ -10,10 +10,50 @@ class MainController extends Controller
 {
     public function index()
     {
-        // $products = Product::all()->toArray();
-        // print_r($products);
+        // Apresentando como um array de objetos.
+        // $results = $this->arrayOfObject(Product::all()->toArray());
 
-        $results = TesteModel::all()->toArray();
-        print_r($results);
+        // Buscar produtos ordenados alfabeticamente.
+        // $results = Product::orderBy('product_name')->get()->toArray();
+
+        // Buscar produtos com cláusula where.
+        // $results = Product::where('price', '>=', 70)->get()->toArray();
+
+        // Buscar o primeiro produto, se não tiver, retorna array vazio.
+        // $results = Product::where('price', '>=', 120)->firstOr(function(){
+        //     echo "Não existe!";
+        // });
+
+        // $this->showData($results);
+
+
+        
+        // Insert new product at database
+        // $new_product = new Product();
+        // $new_product->product_name = "Novo Produto";
+        // $new_product->price = 50;
+        // $new_product->save();
+
+        // 2nd way to insert (with created_at e updated_at)
+        Product::create([
+            "product_name" => "Novo Produto 2",
+            "price" => 60
+        ]);
+    }
+
+    private function showData($data)
+    {
+        echo '<pre>';
+        print_r($data);
+    }
+
+    private function arrayOfObject($data): Array
+    {
+        $tmp = [];
+        foreach ($data as $key => $value) 
+        {
+            $tmp[] = (object) $value;
+        }
+        return $tmp;
     }
 }

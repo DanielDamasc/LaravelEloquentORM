@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    // ligado a tabela dos produtos
-    
+    // Para adicionar os produtos atráves do create.
+    protected $fillable = ['product_name', 'price'];
 }
