@@ -1,11 +1,6 @@
 <?php
 
-use App\Models\Product;
-use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function(){
-    $products = Product::all();
-    echo '<pre>';
-    print_r($products->toArray());
-});
+Route::get('/', [MainController::class, 'index']);
