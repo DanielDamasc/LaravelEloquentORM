@@ -44,10 +44,22 @@ class MainController extends Controller
     public function BelongsTo()
     {
         // Vamos pegar o telefone e descobrir a qual cliente pertence
-        $phone1 = Phone::find(10);
-        $client = $phone1->client;
-        echo "Telefone: " . $phone1->phone_number . "<br>";
-        echo "Cliente: " . $client->client_name . "<br>";
+        // $phone1 = Phone::find(10);
+        // $client = $phone1->client;
+        // echo "Telefone: " . $phone1->phone_number . "<br>";
+        // echo "Cliente: " . $client->client_name . "<br>";
+    }
+
+    public function ManyToMany()
+    {
+        // Buscar um cliente e todos os produtos que ele comprou.
+        $client1 = Client::find(1);
+        $products = $client1->products;
+        echo "Cliente: " . $client1->client_name . "<br>";
+        echo "Produtos: <br>";
+        foreach ($products as $product) {
+            echo $product->product_name . "<br>";
+        }
     }
 
     private function showData($data)
